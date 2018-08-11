@@ -1,0 +1,80 @@
+body  {
+    background-image: url("/images/kalah_bg.jpg");
+    font-family: 'Courier New';
+    text-align: center;
+}
+
+button {
+    cursor: pointer;
+    padding: 7px 13px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: #555;
+    background: #f7f7f7;
+    box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgba( 0, 0, 0, 0.08 );
+}
+
+.start {
+  color: grey;
+  font-weight: bold;
+}
+
+.gameStatus {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.board {
+    margin: 30px auto;
+    display: flex;
+    border: 1px solid #bbb;
+    box-shadow: 0 0 5px #bbb;
+    width: 900px;
+    height: 230px;
+    max-width: 100%;
+    background: url("/images/board_bg.jpg");
+    border-radius: 20px;
+}
+
+.rows {
+    flex: 7;
+    display: flex;
+    flex-direction: column;
+}
+
+.store {
+    flex: 1;
+    border-radius: 30px;
+    cursor: default;
+    width: 30px;
+    height: 200px;
+}
+
+.row {
+    flex: 1;
+    display: flex;
+}
+
+.store, .pit {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,.11);
+    box-shadow: inset 0 5px rgba(0,0,0,.5);
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.pit {
+    flex: 1;
+    border-radius: 100%;
+}
+
+.store.player2, .player2 .pit {
+    color: #55c1c3;
+}
+
+.store.player1, .player1 .pit {
+    color: #01b8e2;
+}
