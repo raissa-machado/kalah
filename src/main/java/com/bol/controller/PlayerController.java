@@ -2,6 +2,7 @@ package com.bol.controller;
 
 import com.bol.model.Player;
 import com.bol.service.PlayerService;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,9 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
-    @MessageMapping("/player")
-    @SendTo("/topic/player/new")
-    public Player createPlayer(Player player) {
-        return playerService.createPlayer(player.getName(), player.getTurn());
+    @MessageMapping("/player/{sessionId}")
+    @SendTo("/topic/player/new/{sessionId}")
+    public Player createPlayer(@DestinationVariable String sessionId, Player player) {
+         return playerService.createPlayer(player.getName(), player.getTurn());
     }
 }
