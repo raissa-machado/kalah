@@ -19,7 +19,7 @@ public class PitService {
     public ArrayList<Pit> createInitialArrayOfPits(Integer size) {
         ArrayList<Pit> pits = new ArrayList<>();
         for(int i=0; i<size; i++) {
-            pits.add(pitRepository.save(new Pit(null, 6)));
+            pits.add(pitRepository.save(Pit.builder().numberOfStones(size).build()));
         }
         return pits;
     }

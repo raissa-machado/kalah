@@ -5,7 +5,6 @@ import com.bol.repository.StoreRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.UUID;
 
 
 @Service
@@ -24,6 +23,6 @@ public class StoreService {
 
     @Transactional
     public Store createInitialStore() {
-        return storeRepository.save(new Store(UUID.randomUUID(), 0));
+        return storeRepository.save(Store.builder().numberOfStones(0).build());
     }
 }

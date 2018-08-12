@@ -59,19 +59,23 @@ function displayCurrentGame(game) {
 
 function displayGameStatus(game) {
   if (game.status == "GAME_OVER") {
-    if (game.board.player1.store > game.board.player2.store) {
-      replaceElementText("gameStatus", "Game Over! Winner is: " + game.board.player1.name);
-    }
-    else if (game.board.player2.store > game.board.player1.store) {
-      replaceElementText("gameStatus", "Game Over! Winner is: " + game.board.player2.name);
-    }
-    else {
-      replaceElementText("gameStatus", "Game Over! It was a tie.");
-    }
+    displayGameOver(game);
   } else if (game.playersTurn == "FIRST") {
     replaceElementText("gameStatus", "Turn: " + game.board.player1.name);
   } else {
     replaceElementText("gameStatus", "Turn: " + game.board.player2.name);
+  }
+}
+
+function displayGameOver(game) {
+  if (game.board.player1.store > game.board.player2.store) {
+    replaceElementText("gameStatus", "Game Over! Winner is: " + game.board.player1.name);
+  }
+  else if (game.board.player2.store > game.board.player1.store) {
+    replaceElementText("gameStatus", "Game Over! Winner is: " + game.board.player2.name);
+  }
+  else {
+    replaceElementText("gameStatus", "Game Over! It was a tie.");
   }
 }
 
@@ -91,27 +95,24 @@ function newGame(game) {
 
 function replaceElementText(elementId, text){
   console.log("updating elementId: " + elementId + " With value: " + text);
-  if (document.getElementById) {
-    var element = document.getElementById(elementId);
-    if (element){
-      if (element.childNodes[0]){
-        element.childNodes[0].nodeValue=text;
-      } else if (element.value){
-        element.value = text;
-      } else {
-        element.innerHTML = text;
-      }
-    }
-  }
+  $( document.getElementById(elementId) ).text(text);
+  // if (document.getElementById) {
+  //   var element = document.getElementById(elementId);
+  //   if (element){
+  //     if (element.childNodes[0]){
+  //       element.childNodes[0].nodeValue=text;
+  //     } else if (element.value){
+  //       element.value = text;
+  //     } else {
+  //       element.innerHTML = text;
+  //     }
+  //   }
+  // }
 }
 
 $(function () {
-    $( "#sendPlayers" ).click(function() {
-      connect();
-    });
-    $( "#startGame" ).click(function() {
-      sendNewGame();
-    });
+    $( "#sendPlayers" ).click(function() { connect(); });
+    $( "#startGame" ).click(function() { sendNewGame(); });
     $( "#p1b5" ).click(function() { sendMove(player1.id, 5); });
     $( "#p1b4" ).click(function() { sendMove(player1.id, 4); });
     $( "#p1b3" ).click(function() { sendMove(player1.id, 3); });

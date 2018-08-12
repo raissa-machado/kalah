@@ -38,9 +38,9 @@ public class PlayerServiceTest {
     public void setUp() throws Exception {
         ArrayList<Pit> pits = new ArrayList<>(6);
         for(int i=0; i<6; i++) {
-            pits.add(new Pit(UUID.randomUUID(), 6));
+            pits.add(Pit.builder().numberOfStones(6).build());
         }
-        store = new Store(UUID.randomUUID(), 0);
+        store = Store.builder().numberOfStones(0).build();
         player = Player.builder()
                 .id(UUID.randomUUID())
                 .name("Teste")

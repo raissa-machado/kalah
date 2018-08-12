@@ -16,6 +16,7 @@ import java.util.UUID;
 public class BoardService {
 
     private BoardRepository boardRepository;
+
     private PlayerService playerService;
 
     public BoardService(BoardRepository boardRepository, PlayerService playerService) {
@@ -25,11 +26,11 @@ public class BoardService {
 
     @Transactional
     public Board createBoard(Player player1, Player player2) {
-        return boardRepository.save(new Board(null, player1, player2));
+        return boardRepository.save(Board.builder().player1(player1).player2(player2).build());
     }
 
     @Transactional
-    public GameStatus sow(Board board, int pitIndex, UUID playersId, PlayerTurn playersTurn) {
+    public GameStatus sow(Board board, Integer pitIndex, UUID playersId, PlayerTurn playersTurn) {
         Player player = playerService.findPlayerById(playersId);
         if (!player.getTurn().equals(playersTurn))
             return GameStatus.ILLEGAL_PLAYER;
@@ -41,13 +42,13 @@ public class BoardService {
         return isGameOver(board) ? GameStatus.GAME_OVER : gameStatus;
     }
 
-    private GameStatus sow(Player currentPlayer, int pitIndex, Player opponentPlayer, PlayerTurn playersTurn) {
+    private GameStatus sow(Player currentPlayer, Integer pitIndex, Player opponentPlayer, PlayerTurn playersTurn) {
         int numberOfStones = currentPlayer.getPits().get(pitIndex).getNumberOfStones();
         currentPlayer.getPits().get(pitIndex).removeStones();
         pitIndex++;
         GameStatus gameStatus = GameStatus.CONTINUE;
-        Player temporaryPlayer;
         Boolean wasPitEmpty = Boolean.FALSE;
+
         while (numberOfStones > 0) {
             for (; pitIndex < 6 && numberOfStones > 0; pitIndex++, numberOfStones--) {
                 wasPitEmpty = currentPlayer.getPits().get(pitIndex).getNumberOfStones().equals(0) ? Boolean.TRUE : Boolean.FALSE;
@@ -66,7 +67,8 @@ public class BoardService {
                     gameStatus = GameStatus.CONTINUE;
                 }
             }
-            temporaryPlayer = currentPlayer;
+
+            Player temporaryPlayer = currentPlayer;
             currentPlayer = opponentPlayer;
             opponentPlayer = temporaryPlayer;
             pitIndex = 0;
@@ -74,11 +76,11 @@ public class BoardService {
         return gameStatus;
     }
 
-    private int opponentsPitIndex(int pitIndex) {
+    private int opponentsPitIndex(Integer pitIndex) {
         return Math.abs(pitIndex - 5);
     }
 
-    private void steal(Player player1, int pitIndex1, Player player2, int pitIndex2) {
+    private void steal(Player player1, Integer pitIndex1, Player player2, Integer pitIndex2) {
         Integer collectedStones1 = playerService.removeStonesFromPit(player1, pitIndex1);
         Integer collectedStones2 = playerService.removeStonesFromPit(player2, pitIndex2);
         playerService.collectToStore(player1, collectedStones1 + collectedStones2);

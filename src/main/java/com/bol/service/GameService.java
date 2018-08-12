@@ -43,8 +43,6 @@ public class GameService {
             case GAME_OVER:
                 boardService.collectAllPits(game.getBoard());
                 break;
-            case CONTINUE:
-                break;
         }
         game.setGameStatus(gameStatus);
         return game;

@@ -1,8 +1,7 @@
 package com.bol.model;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,9 +12,8 @@ import java.util.UUID;
 
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@Builder
 public class Store implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
