@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +24,6 @@ import java.util.UUID;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Builder
 public class Player implements Serializable {
     @Id
@@ -32,7 +32,7 @@ public class Player implements Serializable {
     private String name;
     private PlayerTurn turn;
 
-    @OneToMany(targetEntity = Pit.class)
+    @OneToMany(targetEntity = Pit.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "pits", referencedColumnName = "id")
     @OrderColumn
     private List<Pit> pits;

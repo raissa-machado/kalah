@@ -4,6 +4,7 @@ import com.bol.model.Pit;
 import com.bol.repository.PitRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 
 
@@ -16,6 +17,7 @@ public class PitService {
         this.pitRepository = pitRepository;
     }
 
+    @Transactional
     public ArrayList<Pit> createInitialArrayOfPits(Integer size) {
         ArrayList<Pit> pits = new ArrayList<>();
         for(int i=0; i<size; i++) {
@@ -24,6 +26,7 @@ public class PitService {
         return pits;
     }
 
+    @Transactional
     public Integer emptyPit(Pit pit) {
         return pit.removeStones();
     }

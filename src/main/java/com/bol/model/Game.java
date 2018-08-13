@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +24,7 @@ public class Game implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private UUID id;
-    @ManyToOne(fetch= FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="board_id", referencedColumnName = "id")
     private Board board;
     private GameStatus gameStatus;

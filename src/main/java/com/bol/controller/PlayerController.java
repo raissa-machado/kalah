@@ -17,9 +17,9 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
-    @MessageMapping("/player/{sessionId}")
-    @SendTo("/topic/player/new/{sessionId}")
-    public Player createPlayer(@DestinationVariable String sessionId, Player player) {
+    @MessageMapping("/player/{gameId}")
+    @SendTo("/topic/player/new/{gameId}")
+    public Player createPlayer(@DestinationVariable String gameId, Player player) {
          return playerService.createPlayer(player.getName(), player.getTurn());
     }
 }

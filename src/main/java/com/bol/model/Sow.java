@@ -15,5 +15,5 @@ import java.util.UUID;
 public class Sow {
     private UUID gameId;
     private UUID playerId;
-    private int pitIndex;
+    private Integer pitIndex;
 }

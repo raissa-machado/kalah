@@ -44,8 +44,7 @@ public class BoardService {
 
     private GameStatus sow(Player currentPlayer, Integer pitIndex, Player opponentPlayer, PlayerTurn playersTurn) {
         int numberOfStones = currentPlayer.getPits().get(pitIndex).getNumberOfStones();
-        currentPlayer.getPits().get(pitIndex).removeStones();
-        pitIndex++;
+        currentPlayer.getPits().get(pitIndex++).removeStones();
         GameStatus gameStatus = GameStatus.CONTINUE;
         Boolean wasPitEmpty = Boolean.FALSE;
 

@@ -21,15 +21,15 @@ public class GameController {
         this.gameService = gameService;
     }
 
-    @MessageMapping("/game/{sessionId}")
-    @SendTo("/topic/game/new/{sessionId}")
-    public Game createGame(@DestinationVariable String sessionId, List<Player> players) {
+    @MessageMapping("/game/{gameId}")
+    @SendTo("/topic/game/new/{gameId}")
+    public Game createGame(@DestinationVariable String gameId, List<Player> players) {
         return gameService.createGame(players.get(0), players.get(1));
     }
 
-    @MessageMapping("/sow/{sessionId}")
-    @SendTo("/topic/game/sow/{sessionId}")
-    public Game sowStones(@DestinationVariable String sessionId, Sow sow) {
+    @MessageMapping("/sow/{gameId}")
+    @SendTo("/topic/game/sow/{gameId}")
+    public Game sowStones(@DestinationVariable String gameId, Sow sow) {
        return gameService.sow(sow);
     }
 
